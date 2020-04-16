@@ -1,1 +1,1 @@
-# fp
+# Functional programming in GO
