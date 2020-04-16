@@ -42,3 +42,16 @@ func BenchmarkFibCahed(b *testing.B) {
 		FibCashed(20)
 	}
 }
+
+func BenchmarkFib50(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Fib(20)
+	}
+}
+
+func BenchmarkFibCahed50(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		FibCash = FibCashed
+		FibCashed(20)
+	}
+}

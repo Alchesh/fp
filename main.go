@@ -4,8 +4,12 @@ import "fmt"
 
 func main() {
 
-	val := 4
+	val := 7
 
-	fmt.Println("Fib = ", Fib(val), "\nCahedFib = ", FibCashed(val))
+	fmt.Println("Fib = ", Fib(val))
+
+	FibCash = FibCashed
+	fmt.Println("\nCahedFib = ", FibCashed(val))
+
 	fmt.Println("\nAll Done!")
 }

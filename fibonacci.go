@@ -1,7 +1,5 @@
 package main
 
-//import "fmt"
-
 type CachedFunc func(int) int
 
 var FibCash = Cache(Fib) // Init cache on start app
@@ -36,5 +34,15 @@ func Cache(m CachedFunc) CachedFunc {
 }
 
 func FibCashed(val int) int {
+
+	FibCash = Cache(func(val int) int {
+		if val == 0 {
+			return 0
+		} else if val <= 2 {
+			return 1
+		}
+
+		return FibCash(val-2) + FibCash(val-1)
+	})
 	return FibCash(val)
 }
