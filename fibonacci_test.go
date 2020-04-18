@@ -31,6 +31,14 @@ func TestFibCached(t *testing.T) {
 	}
 }
 
+func TestFibChanneled(t *testing.T) {
+	for _, test := range Tests {
+		if v := FibChanneled(test.val); v != test.expected {
+			t.Errorf("FibChanneled(%d) returned %d, expected %d", test.val, v, test.expected)
+		}
+	}
+}
+
 func BenchmarkFib(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Fib(20)
@@ -40,6 +48,12 @@ func BenchmarkFib(b *testing.B) {
 func BenchmarkFibCahed(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		FibCashed(20)
+	}
+}
+
+func BenchmarkFibChanneled(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		FibChanneled(20)
 	}
 }
 
@@ -53,5 +67,11 @@ func BenchmarkFibCahed50(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		FibCash = FibCashed
 		FibCashed(20)
+	}
+}
+
+func BenchmarkFibChanneled50(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		FibChanneled(20)
 	}
 }

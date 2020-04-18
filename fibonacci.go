@@ -1,5 +1,11 @@
 package main
 
+/*
+import (
+	"fmt"
+)
+*/
+
 type CachedFunc func(int) int
 
 var FibCash = Cache(Fib) // Init cache on start app
@@ -33,6 +39,7 @@ func Cache(m CachedFunc) CachedFunc {
 	}
 }
 
+// FibCashed - fibonacci with cache
 func FibCashed(val int) int {
 
 	FibCash = Cache(func(val int) int {
@@ -45,4 +52,30 @@ func FibCashed(val int) int {
 		return FibCash(val-2) + FibCash(val-1)
 	})
 	return FibCash(val)
+}
+
+func Channel(ch chan int, counter int) {
+	n1, n2 := 0, 1
+	for i := 0; i < counter; i++ {
+		ch <- n1
+		n1, n2 = n2, n1+n2
+	}
+	close(ch)
+}
+
+// FibCashed - fibonacci with channels
+func FibChanneled(n int) int {
+	var result int
+
+	n += 2
+	ch := make(chan int)
+	go Channel(ch, n-1) // one channel for one number
+	i := 0
+
+	for num := range ch {
+		result = num
+		//fmt.Println("result =", result)
+		i++
+	}
+	return result
 }
